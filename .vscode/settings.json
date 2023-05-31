@@ -9,7 +9,7 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "cedric",
-            "database": "sara_db",
+            "database": "loginapp",
             "username": "cedric",
             "password": "Falconview_3141"
         }
