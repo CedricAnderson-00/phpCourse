@@ -1,9 +1,13 @@
-<?php
+<?php include "db.php";
 
 $query = "SELECT * FROM users";
-
-$connection = mysqli_connect("localhost", 'cedric', 'Falconview_3141', "loginapp");
 $result = mysqli_query($connection, $query);
+
+if ($connection) {
+    echo "Connected";
+} else {
+    echo "Connection Error";
+}
 
 ?>
 
@@ -23,13 +27,34 @@ $result = mysqli_query($connection, $query);
 
     <div class="container">
         <div class="col-sm-6">
-            <?php
+            <form action="db.php" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="" aria-describedby="helpId">
+                    <small id="helpId" class="text-muted">No special characters</small>
+                </div>
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                print_r($row);
-            }
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="" aria-describedby="helpId">
+                    <small id="helpId" class="text-muted">0-12</small>
+                </div>
 
-            ?>
+                <div class="form-group">
+                    <select name="id" id="">
+                        <?php
+                            while($row = mysqli_fetch_assoc($result)){
+                                $id = $row["id"];
+                                
+                            echo "<option value='$id'>$id</option>";
+                            }
+
+                        ?>
+                    </select>
+                </div>
+
+                <input type="submit" name="submit" id="button" value="Submit" class="btn btn-primary">
+            </form>
         </div>
     </div>
 
